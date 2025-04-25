@@ -158,7 +158,19 @@ function _0x5ec9(e, t) {
 
 function startSearch(value){
     const yt = fetch.post("https://cdn303.savetube.su/v2/info",{
-    "Content-Type": "application/json"  // Add Content-Type for sending JSON
+    // "Content-Type": "application/json"  // Add Content-Type for sending JSON
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0",
+                "Accept": "*/*",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Accept-Encoding": "gzip, deflate, br, zstd",
+                // "Referer": "https://i-y2mate.com/",
+                // "Origin": "https://i-y2mate.com",
+                "Connection": "keep-alive",
+                "Sec-Fetch-Dest": "empty",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "cross-site",
+                "Priority": "u=0",
+                "Content-Type": "application/json"  // Add Content-Type for sending JSON
 
 },{ url: value});
 
