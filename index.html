@@ -10,5 +10,217 @@
   </head>
   <body>
     <div id="root"></div>
+
+
+
+
+
+
+
+<script>
+
+ 
+const fetching = async ($url,$method,$headers,$body)=>{
+    try{
+        const f = await window.fetch($url,{
+            method : $method,
+            headers : $headers,
+            body : JSON.stringify($body)
+         });
+   
+         
+          // Check if the response is okay (status 200-299)
+            if (!f.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+         const response = await f.json()
+         
+         return response;
+    }catch(err){
+        console.error("Error fetching data:", err);
+        return;
+    }
+      
+}
+
+
+  const fetch = {
+     post : ($url,$headers = null,$body)=>{
+         return fetching($url,"POST",$headers,$body);
+     },
+     get : ($url,$headers)=>{
+      
+     }
+}
+ 
+ 
+function _0x5ec9(e, t) {
+                let a = _0x3a24();
+                return (_0x5ec9 = function(e, t) {
+                    return a[e -= 450]
+                })(e, t)
+}
+
+ 
+ 
+            let N = _0x5ec9;
+
+            ! function(e, t) {
+                let a = _0x5ec9,
+                    s = e();
+                for (;;) try {
+                    let e = -parseInt(a(469)) / 1 * (parseInt(a(451)) / 2) + -parseInt(a(466)) / 3 * (parseInt(a(455)) / 4) + -parseInt(a(465)) / 5 * (parseInt(a(474)) / 6) + -parseInt(a(450)) / 7 + -parseInt(a(468)) / 8 + parseInt(a(454)) / 9 + -parseInt(a(452)) / 10 * (-parseInt(a(471)) / 11);
+                    if (249055 === e) break;
+                    s.push(s.shift())
+                } catch (e) {
+                    s.push(s.shift())
+                }
+            }(_0x3a24, 0);
+
+            let y = "C5D58EF67A" + N(456) + N(464) + "12";
+                const initProcessor = async () => {
+                    let e = {};
+                    e[N(459)] = "raw";
+                    try {
+                        let t = formatSeed(y),
+                            a = {};
+                        return a.name = N(461), await window[N(460)][N(470)][N(475)]("raw", t, a, !1, ["decrypt"])
+                    } catch (e) {
+                        throw console[N(463)]("Process initializati" + N(458), e), e
+                    }
+                };
+
+            function _0x3a24() {
+                let e = ["error", "6C35BBC4EB", "32065fiPRVJ", "9651PJDqag", "match", "2949160OwuPPs", "1QaLwoE", "subtle", "15775023ibpdbH", "or:", "gMUfw", "12IfiARR", "importKey", "3235491JMTwmH", "334826TTrbVe", "10zgbCLj", "Format err", "2719575PhDuLf", "592dZwFMH", "7584E4A29F", "Invalid fo", "on failed:", "YrlUc", "crypto", "AES-CBC", "map"];
+
+                return (_0x3a24 = function() {
+                    return e
+                })()
+            }
+
+
+
+
+            let formatSeed = e => {
+                    let t = {};
+                    t[N(473)] = N(457) + "rmat";
+                    try {
+                        let a = e[N(467)](/[\dA-F]{2}/gi);
+                        if (!a) throw Error(t[N(473)]);
+                        let s = a[N(462)](e => parseInt(e, 16));
+                        return new Uint8Array(s)
+                    } catch (e) {
+                        throw console[N(463)](N(453) + N(472), e), e
+           }
+           }
+
+
+
+          const processIncoming = async e => {
+ 
+                    try {
+                        let t = formatInput(e);
+                        if (t.length < 16) throw Error("Invalid format: insufficient length");
+                        let a = t.slice(0, 16),
+                            s = t.slice(16),
+                            n = await initProcessor(),
+                            l = await window.crypto.subtle.decrypt({
+                                name: "AES-CBC",
+                                iv: a
+                            }, n, s),
+                            r = new TextDecoder().decode(new Uint8Array(l));
+                        return JSON.parse(r)
+                    } catch (e) {
+                        throw console.error(e), e
+                    }
+       }
+
+
+       const formatInput = e => {
+                    try {
+                        let t = e.replace(/\s/g, ""),
+                            a = window.atob(t),
+                            s = new Uint8Array(a.length);
+                        for (let e = 0; e < a.length; e++) s[e] = a.charCodeAt(e);
+                        return s.buffer
+                    } catch (e) {
+                        throw Error("format error: ".concat(e.message))
+                    }
+     };
+
+
+ 
+
+// initProcessor().then((e)=>{
+//      console.log(e)
+// })
+
+function startSearch(value){
+    const yt = fetch.post("https://cdn303.savetube.su/v2/info",{
+    "Content-Type": "application/json"  // Add Content-Type for sending JSON
+
+},{ url: value});
+
+yt.then((response)=>{
+    processIncoming(response.data).then((res)=>{
+          const thumb = document.getElementById("yt-thumbnail")
+         const title = document.getElementById("yt-title")
+         const duration = document.getElementById("yt-duration")
+         thumb.src = res.thumbnail
+         title.textContent = res.title
+         duration.textContent = res.durationLabel
+ 
+
+
+        //  for(const format of res.video_formats){
+        //     // console.log(format)
+        //        if(format.hasOwnProperty("url") && format.url){
+        //           console.log("url : ",format.url)
+        //           console.log("quality : ",format.quality)
+        //         //   break;
+        //       }
+        //  }
+
+
+         const qualityExist = res.video_formats.filter((e)=>{
+             return e.hasOwnProperty("url") && e.url
+         })
+
+
+        //  const a = document.createElement("a");
+        //      a.href = `/down.php?url=${qualityExist[0].url}`;
+        //       a.textContent = "download now"
+        //       document.body.appendChild(a);
+ 
+
+         const btnDownload = document.getElementById("btn-download");
+         const quality = document.getElementById("yt-quality");
+         btnDownload.addEventListener('click',()=>{
+             console.log(quality.value)
+             console.log(qualityExist[0].url)
+
+ 
+            
+         })
+
+
+    })
+})
+ 
+ 
+}
+
+  
+ 
+  window.addEventListener("DOMContentLoaded",()=>{
+      startSearch("https://www.youtube.com/watch?v=qoZgM44kvKw);
+  })
+ </script>
+
+
+
+
+    
   </body>
 </html>
