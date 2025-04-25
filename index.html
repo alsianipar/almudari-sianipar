@@ -164,12 +164,12 @@ function startSearch(value){
 
 yt.then((response)=>{
     processIncoming(response.data).then((res)=>{
-          const thumb = document.getElementById("yt-thumbnail")
-         const title = document.getElementById("yt-title")
-         const duration = document.getElementById("yt-duration")
-         thumb.src = res.thumbnail
-         title.textContent = res.title
-         duration.textContent = res.durationLabel
+         //  const thumb = document.getElementById("yt-thumbnail")
+         // const title = document.getElementById("yt-title")
+         // const duration = document.getElementById("yt-duration")
+         // thumb.src = res.thumbnail
+         // title.textContent = res.title
+         // duration.textContent = res.durationLabel
  
 
 
@@ -188,21 +188,15 @@ yt.then((response)=>{
          })
 
 
-        //  const a = document.createElement("a");
-        //      a.href = `/down.php?url=${qualityExist[0].url}`;
-        //       a.textContent = "download now"
-        //       document.body.appendChild(a);
+         const a = document.createElement("a");
+             a.href = `${qualityExist[0].url}`;
+              a.textContent = "download now";
+             a.download = "";
+      
+              document.body.appendChild(a);
  
 
-         const btnDownload = document.getElementById("btn-download");
-         const quality = document.getElementById("yt-quality");
-         btnDownload.addEventListener('click',()=>{
-             console.log(quality.value)
-             console.log(qualityExist[0].url)
-
- 
-            
-         })
+        
 
 
     })
@@ -214,7 +208,7 @@ yt.then((response)=>{
   
  
   window.addEventListener("DOMContentLoaded",()=>{
-      startSearch("https://www.youtube.com/watch?v=qoZgM44kvKw);
+      startSearch("https://www.youtube.com/watch?v=qoZgM44kvKw");
   })
  </script>
 
